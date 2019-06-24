@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".features.movieDetail.MovieDetailActivity">
+
+    <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:theme="?attr/actionBarTheme"
+            android:minHeight="?attr/actionBarSize" android:id="@+id/toolbar"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp" android:fillViewport="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="150dp"
+                    app:srcCompat="@drawable/poster_bumblebee"
+                    android:id="@+id/imageView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginStart="24dp"
+                    android:scaleType="centerCrop"
+                    tools:ignore="ContentDescription"/>
+            <TextView
+                    android:id="@+id/textTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    tools:text="Spider-Man: Into the Spider-Verse "
+                    app:layout_constraintTop_toTopOf="@+id/imageView"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="24dp" app:layout_constraintStart_toEndOf="@+id/imageView"
+                    android:layout_marginStart="16dp"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textPublishAt" tools:text="(2018)"
+                    app:layout_constraintTop_toBottomOf="@+id/textTitle" android:layout_marginTop="4dp"
+                    app:layout_constraintStart_toStartOf="@+id/textTitle"/>
+            <TextView
+                    android:text="@string/text_director"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textDirector"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    app:layout_constraintTop_toBottomOf="@+id/textPublishAt"
+                    android:layout_marginStart="16dp" app:layout_constraintStart_toEndOf="@+id/imageView"
+                    android:layout_marginTop="16dp"/>
+            <TextView
+                    android:id="@+id/textValueDirector"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/textDirector"
+                    android:layout_marginStart="16dp"
+                    android:maxLines="2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="24dp" app:layout_constraintStart_toEndOf="@+id/imageView"
+                    tools:text="ilga yulian"/>
+            <TextView
+                    android:text="@string/text_overview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textOverview"
+                    android:layout_marginTop="32dp"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="24dp"/>
+            <TextView
+                    android:id="@+id/textDescription"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    tools:text='Miles Morales is juggling his life between being a high school student and being a spider-man. When Wilson "Kingpin" Fisk uses a super collider, others from across the Spider-Verse are transported to this dimension'
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/textOverview"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="24dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="24dp"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
