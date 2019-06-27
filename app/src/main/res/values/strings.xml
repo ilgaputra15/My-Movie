@@ -5,6 +5,8 @@
     <string name="text_home">Home</string>
     <string name="text_overview">Overview</string>
     <string name="text_director">Director</string>
+    <string name="text_title_movie">Movies</string>
+    <string name="text_title_tv_show">Tv Show</string>
 
     <string-array name="data_title">
         <item>A Star Is Born</item>
