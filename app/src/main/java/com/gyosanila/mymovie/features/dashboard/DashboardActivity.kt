@@ -11,6 +11,9 @@ import com.gyosanila.mymovie.features.fragmentMovie.FragmentMovie
 import com.gyosanila.mymovie.features.fragmentTvShow.FragmentTvShow
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.content_dashboard.*
+import android.provider.Settings.ACTION_LOCALE_SETTINGS
+import android.content.Intent
+import android.view.Menu
 
 class DashboardActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -37,10 +40,6 @@ class DashboardActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
     private fun setupUI() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
         fragmentMovies()
         bottomNavigationView.setOnNavigationItemSelectedListener(this)
 
@@ -56,5 +55,18 @@ class DashboardActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
         toolbar_title.text = getString(R.string.text_title_tv_show)
         val fragmentTvShow = FragmentTvShow()
         this.changeFragment(fragmentTvShow)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.toolbar_dashboard, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.action_change_settings) {
+            val mIntent = Intent(ACTION_LOCALE_SETTINGS)
+            startActivity(mIntent)
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
