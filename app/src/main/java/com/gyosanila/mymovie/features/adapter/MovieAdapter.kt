@@ -2,11 +2,8 @@ package com.gyosanila.mymovie.features.adapter
 
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import com.gyosanila.mymovie.features.network.Movie
-import android.content.Context
 import android.view.LayoutInflater
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.gyosanila.mymovie.R
 import kotlinx.android.synthetic.main.item_movie.view.*
