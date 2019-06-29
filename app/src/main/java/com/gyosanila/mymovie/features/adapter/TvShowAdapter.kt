@@ -24,22 +24,24 @@ class TvShowAdapter(private val clickListener: (Movie) -> Unit) : RecyclerView.A
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TvShowHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_tv_show, parent, false)
-        return TvShowHolder(view)
+        val viewHolder = TvShowHolder(view)
+        viewHolder.itemView.setOnClickListener {
+            val position = viewHolder.adapterPosition
+            clickListener(listTvShow[position])
+        }
+        return viewHolder
     }
 
     override fun getItemCount() = listTvShow.size
 
     override fun onBindViewHolder(holder: TvShowHolder, position: Int) {
-        holder.bind(listTvShow[position], clickListener)
+        holder.bind(listTvShow[position])
     }
 
 
     class TvShowHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(part: Movie, clickListener: (Movie) -> Unit) {
+        fun bind(part: Movie) {
             itemView.imageTvShow.setImageResource(part.photoResource)
-            itemView.setOnClickListener {
-                clickListener(part)
-            }
         }
     }
 }

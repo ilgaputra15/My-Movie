@@ -65,6 +65,7 @@ class DashboardActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
         if (item.itemId == R.id.action_change_settings) {
             val mIntent = Intent(ACTION_LOCALE_SETTINGS)
             startActivity(mIntent)
+            return true
         }
         return super.onOptionsItemSelected(item)
     }
