@@ -1,21 +1,20 @@
 package com.gyosanila.mymovie.features.dashboard
 
-import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
-import android.widget.AdapterView
-import com.google.android.material.snackbar.Snackbar
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.gyosanila.mymovie.R
-import com.gyosanila.mymovie.features.adapter.MovieAdapter
-import com.gyosanila.mymovie.features.movieDetail.MovieDetailActivity
-import com.gyosanila.mymovie.features.network.Movie
+import com.gyosanila.mymovie.core.extension.changeFragment
+import com.gyosanila.mymovie.features.fragmentMovie.FragmentMovie
+import com.gyosanila.mymovie.features.fragmentTvShow.FragmentTvShow
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.content_dashboard.*
+import android.provider.Settings.ACTION_LOCALE_SETTINGS
+import android.content.Intent
+import android.view.Menu
 
-class DashboardActivity : AppCompatActivity() {
-
-    private val listMovie = ArrayList<Movie>()
+class DashboardActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,44 +22,51 @@ class DashboardActivity : AppCompatActivity() {
         setupUI()
     }
 
+    override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
+        when(menuItem.itemId){
+            R.id.navigation_movies -> {
+                fragmentMovies()
+                return true
+            }
+            R.id.navigation_tv_show -> {
+                fragmentTvShow()
+                return true
+            }
+        }
+        return false
+    }
+
     private fun setupUI() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
-        listViewMovie.adapter = MovieAdapter(this, setMovieList())
-        listViewMovie.onItemClickListener = AdapterView.OnItemClickListener {
-                _, _, position, _ ->  navigateToMovieDetail(listMovie[position])
-        }
+        fragmentMovies()
+        bottomNavigationView.setOnNavigationItemSelectedListener(this)
+
     }
 
-    @SuppressLint("Recycle")
-    fun setMovieList(): ArrayList<Movie> {
-        val dataTitle = resources.getStringArray(R.array.data_title)
-        val dataDescription = resources.getStringArray(R.array.data_description)
-        val dataPhoto = resources.obtainTypedArray(R.array.data_photo)
-        val dataPublish = resources.getStringArray(R.array.data_publish_at)
-        val dataDirector = resources.getStringArray(R.array.data_director)
-        for (data in 0 until dataTitle.size) {
-            val hero = Movie(
-                data,
-                dataTitle[data],
-                dataDescription[data],
-                dataPhoto.getResourceId(data, -1),
-                dataPublish[data],
-                dataDirector[data]
-            )
-            listMovie.add(hero)
+    private fun fragmentMovies() {
+        toolbar_title.text = getString(R.string.text_title_movie)
+        val fragmentMovie = FragmentMovie()
+        this.changeFragment(fragmentMovie)
+    }
+
+    private fun fragmentTvShow() {
+        toolbar_title.text = getString(R.string.text_title_tv_show)
+        val fragmentTvShow = FragmentTvShow()
+        this.changeFragment(fragmentTvShow)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.toolbar_dashboard, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.action_change_settings) {
+            val mIntent = Intent(ACTION_LOCALE_SETTINGS)
+            startActivity(mIntent)
+            return true
         }
-        return listMovie
+        return super.onOptionsItemSelected(item)
     }
-
-    private fun navigateToMovieDetail(movie: Movie) {
-        val toMovieDetail = Intent(this, MovieDetailActivity::class.java)
-        toMovieDetail.putExtra("Movie", movie)
-        startActivity(toMovieDetail)
-    }
-
 }

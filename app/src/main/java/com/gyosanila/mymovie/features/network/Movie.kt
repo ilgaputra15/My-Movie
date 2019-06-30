@@ -1,7 +1,7 @@
 package com.gyosanila.mymovie.features.network
 
-import android.os.Parcel
 import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
 /**
  * Created by ilgaputra15
@@ -9,6 +9,7 @@ import android.os.Parcelable
  * Division Mobile - PT.Homecareindo Global Medika
  **/
 
+@Parcelize
 data class Movie(
     val id: Int,
     val title: String?,
@@ -16,36 +17,4 @@ data class Movie(
     val photoResource: Int,
     val publish_at: String?,
     val director: String?
-) : Parcelable {
-    constructor(parcel: Parcel) : this(
-        parcel.readInt(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readInt(),
-        parcel.readString(),
-        parcel.readString()
-    )
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(id)
-        parcel.writeString(title)
-        parcel.writeString(description)
-        parcel.writeInt(photoResource)
-        parcel.writeString(publish_at)
-        parcel.writeString(director)
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<Movie> {
-        override fun createFromParcel(parcel: Parcel): Movie {
-            return Movie(parcel)
-        }
-
-        override fun newArray(size: Int): Array<Movie?> {
-            return arrayOfNulls(size)
-        }
-    }
-}
+) : Parcelable

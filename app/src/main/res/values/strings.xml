@@ -1,10 +1,12 @@
 <resources>
     <string name="app_name">My Movie</string>
     <string name="title_activity_dashboard">DashboardActivity</string>
-    <string name="title_activity_main2">Main2Activity</string>
     <string name="text_home">Home</string>
     <string name="text_overview">Overview</string>
     <string name="text_director">Director</string>
+    <string name="text_title_movie">Movies</string>
+    <string name="text_title_tv_show">Tv Show</string>
+    <string name="change_language_settings">Change Language Settings</string>
 
     <string-array name="data_title">
         <item>A Star Is Born</item>
@@ -94,6 +96,71 @@
         <item>Rodney Rothman, Bob Persichetti, Peter Ramsey</item>
         <item>Rodney Rothman, Bob Persichetti, Peter Ramsey</item>
         <item>Rodney Rothman, Bob Persichetti, Peter Ramsey</item>
+        <item>Rodney Rothman, Bob Persichetti, Peter Ramsey</item>
+    </string-array>
+
+    <string-array name="data_title_tv_show">
+        <item>Hunter Killer</item>
+        <item>Mary Poppins Returns</item>
+        <item>Mortal Engines</item>
+        <item>Preman Pensiun</item>
+        <item>Robin Hood</item>
+        <item>The Girl in the Spiders Web</item>
+        <item>The Mule</item>
+    </string-array>
+
+    <string-array name="data_description_tv_show">
+        <item>Captain Glass of the USS Arkansas discovers that a coup détat is taking place in Russia, so he and his
+            crew join an elite group working on the ground to prevent a war.
+        </item>
+        <item>In Depression-era London, a now-grown Jane and Michael Banks, along with Michaels three children, are
+            visited by the enigmatic Mary Poppins following a personal loss. Through her unique magical skills, and
+            with the aid of her friend Jack, she helps the family rediscover the joy and wonder missing in their lives.
+        </item>
+        <item>Many thousands of years in the future, Earth’s cities roam the globe on huge wheels, devouring each other
+            in a struggle for ever diminishing resources. On one of these massive traction cities, the old London, Tom
+            Natsworthy has an unexpected encounter with a mysterious young woman from the wastelands who will change the
+            course of his life forever.
+        </item>
+        <item>Five years after an ominous unseen presence drives most of society to suicide, a survivor and her two
+            children make a desperate bid to reach safety.
+        </item>
+        <item>We dont have an overview translated in English. Help us expand our database by adding one.</item>
+        <item>A war-hardened Crusader and his Moorish commander mount an audacious revolt against the corrupt English
+            crown.
+        </item>
+        <item>In Stockholm, Sweden, hacker Lisbeth Salander is hired by Frans Balder, a computer engineer, to retrieve
+            a program that he believes it is too dangerous to exist.
+        </item>
+    </string-array>
+
+    <array name="data_photo_tv_show">
+        <item>@drawable/poster_hunterkiller</item>
+        <item>@drawable/poster_marrypopins</item>
+        <item>@drawable/poster_mortalengine</item>
+        <item>@drawable/poster_preman</item>
+        <item>@drawable/poster_robinhood</item>
+        <item>@drawable/poster_thegirl</item>
+        <item>@drawable/poster_themule</item>
+    </array>
+
+    <string-array name="data_publish_at_tv_show">
+        <item>2018</item>
+        <item>2018</item>
+        <item>2018</item>
+        <item>2018</item>
+        <item>2018</item>
+        <item>2018</item>
+        <item>2017</item>
+    </string-array>
+
+    <string-array name="data_director_tv_show">
+        <item>Donovan Marsh, George Wallace, Don Keith</item>
+        <item>Rob Marshall, Bob Persichetti, P.L. Travers</item>
+        <item>Christian Rivers, Bob Peter Jackson, Peter Ramsey</item>
+        <item>Rodney Rothman, Peter Ramsey</item>
+        <item>Ben Chandler, Bob Persichetti, Peter Ramsey</item>
+        <item>Fede Alvarez, Bob Persichetti, Stieg Larsson</item>
         <item>Rodney Rothman, Bob Persichetti, Peter Ramsey</item>
     </string-array>
 </resources>

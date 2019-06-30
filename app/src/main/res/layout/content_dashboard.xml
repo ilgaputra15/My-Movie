@@ -9,9 +9,23 @@
         tools:showIn="@layout/activity_dashboard"
         tools:context=".features.dashboard.DashboardActivity">
 
-    <ListView
+    <FrameLayout
+            android:id="@+id/containerHome"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView">
+
+    </FrameLayout>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
             android:layout_width="match_parent"
-            android:layout_height="match_parent" app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            android:id="@+id/listViewMovie"/>
+            android:layout_height="56dp"
+            app:labelVisibilityMode="unlabeled"
+            app:menu="@menu/navigation"
+            android:layout_gravity="bottom|end"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" android:id="@+id/bottomNavigationView"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
