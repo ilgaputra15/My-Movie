@@ -1,17 +1,18 @@
 package com.gyosanila.mymovie.features.fragmentTvShow
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.gyosanila.mymovie.R
+import com.gyosanila.mymovie.core.extension.visible
 import com.gyosanila.mymovie.features.adapter.TvShowAdapter
 import com.gyosanila.mymovie.features.movieDetail.MovieDetailActivity
-import com.gyosanila.mymovie.features.network.Movie
+import com.gyosanila.mymovie.features.domain.network.TvShowItem
 import kotlinx.android.synthetic.main.fragment_tv_show.*
 
 /**
@@ -20,9 +21,10 @@ import kotlinx.android.synthetic.main.fragment_tv_show.*
  * Division Mobile - PT.Homecareindo Global Medika
  **/
 
-class FragmentTvShow : Fragment() {
+class FragmentTvShow : Fragment(), FragmentTvShowContract.View {
 
-    private val listTvShow = ArrayList<Movie>()
+    private lateinit var tvShowAdapter: TvShowAdapter
+    private lateinit var presenter: FragmentTvShowPresenter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,36 +40,32 @@ class FragmentTvShow : Fragment() {
     }
 
     private fun setupUI() {
-        val tvShowAdapter = TvShowAdapter { itemSelected: Movie -> listTvShowClicked(itemSelected) }
+        presenter = FragmentTvShowPresenter(this)
+        tvShowAdapter = TvShowAdapter { itemSelected: TvShowItem -> listTvShowClicked(itemSelected) }
         recyclerViewTvShow.layoutManager = GridLayoutManager(activity, 2)
         recyclerViewTvShow.adapter = tvShowAdapter
-        tvShowAdapter.setListTvShow(seListTvShow())
+        getTvShowList()
     }
 
-    private fun listTvShowClicked(itemSelected: Movie) {
+    private fun listTvShowClicked(itemSelected: TvShowItem) {
         val toMovieDetail = Intent(context!!, MovieDetailActivity::class.java)
         toMovieDetail.putExtra("Movie", itemSelected)
         startActivity(toMovieDetail)
     }
 
-    @SuppressLint("Recycle")
-    fun seListTvShow(): ArrayList<Movie> {
-        val dataTitle = resources.getStringArray(R.array.data_title_tv_show)
-        val dataDescription = resources.getStringArray(R.array.data_description_tv_show)
-        val dataPhoto = resources.obtainTypedArray(R.array.data_photo_tv_show)
-        val dataPublish = resources.getStringArray(R.array.data_publish_at_tv_show)
-        val dataDirector = resources.getStringArray(R.array.data_director_tv_show)
-        for (data in 0 until dataTitle.size) {
-            val hero = Movie(
-                data,
-                dataTitle[data],
-                dataDescription[data],
-                dataPhoto.getResourceId(data, -1),
-                dataPublish[data],
-                dataDirector[data]
-            )
-            listTvShow.add(hero)
-        }
-        return listTvShow
+    override fun getTvShowList() {
+        presenter.getTvShowList()
+    }
+
+    override fun setTvShowList(tvShowList: List<TvShowItem>) {
+        tvShowAdapter.setListTvShow(tvShowList.toMutableList())
+    }
+
+    override fun setProgressBar(isShow: Boolean) {
+        progressBar.visible = isShow
+    }
+
+    override fun showError(error: Throwable) {
+        Toast.makeText(activity, "Fetch data error, ${error.message}", Toast.LENGTH_SHORT).show()
     }
 }

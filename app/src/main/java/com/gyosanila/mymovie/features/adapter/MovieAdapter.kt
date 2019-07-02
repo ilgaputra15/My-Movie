@@ -2,7 +2,6 @@ package com.gyosanila.mymovie.features.adapter
 
 import android.view.View
 import android.view.ViewGroup
-import com.gyosanila.mymovie.features.domain.network.Movie
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide

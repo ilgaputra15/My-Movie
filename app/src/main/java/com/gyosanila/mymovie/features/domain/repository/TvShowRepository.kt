@@ -3,9 +3,9 @@ package com.gyosanila.mymovie.features.domain.repository
 import com.gyosanila.mymovie.core.common.Constant
 import com.gyosanila.mymovie.core.service.RetrofitService
 import com.gyosanila.mymovie.core.utils.RxUtils
-import com.gyosanila.mymovie.features.domain.api.MovieService
+import com.gyosanila.mymovie.features.domain.api.TvShowApi
 import com.gyosanila.mymovie.features.domain.network.BaseResponse
-import com.gyosanila.mymovie.features.domain.network.MovieItem
+import com.gyosanila.mymovie.features.domain.network.TvShowItem
 import io.reactivex.Observable
 
 /**
@@ -14,9 +14,9 @@ import io.reactivex.Observable
  * Division Mobile - PT.Homecareindo Global Medika
  **/
 
-class MovieRepository(private val movieApi: MovieService = RetrofitService.movieAPI()) {
+class TvShowRepository(private val tvShowApi: TvShowApi = RetrofitService.movieAPI()) {
 
-    fun getMovieList() : Observable<BaseResponse<MovieItem>> {
-        return movieApi.getListMovie(Constant.MovieAPIKey, 1).compose(RxUtils.applyObservableAsync())
+    fun getTvShowList() : Observable<BaseResponse<TvShowItem>> {
+        return tvShowApi.getListTvShow(Constant.MovieAPIKey, 1).compose(RxUtils.applyObservableAsync())
     }
 }

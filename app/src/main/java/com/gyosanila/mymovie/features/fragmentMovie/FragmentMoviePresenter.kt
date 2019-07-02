@@ -1,6 +1,7 @@
 package com.gyosanila.mymovie.features.fragmentMovie
 
-import com.gyosanila.mymovie.features.domain.network.MovieList
+import com.gyosanila.mymovie.features.domain.network.BaseResponse
+import com.gyosanila.mymovie.features.domain.network.MovieItem
 import com.gyosanila.mymovie.features.domain.repository.MovieRepository
 import io.reactivex.disposables.Disposable
 
@@ -33,7 +34,7 @@ class FragmentMoviePresenter(
         subscriber?.dispose()
     }
 
-    private fun onSuccessGetMovieList(movieList: MovieList) {
+    private fun onSuccessGetMovieList(movieList: BaseResponse<MovieItem>) {
         view.setMovieList(movieList.results)
     }
 
