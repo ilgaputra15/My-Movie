@@ -20,8 +20,4 @@
     <style name="AppTheme.NoActionBar.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
     <style name="AppTheme.NoActionBar.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
-    <style name="CardView.Corner6DpWhite">
-        <item name="android:background">@drawable/corner_card_view_6dp_white</item>
-    </style>
-
 </resources>

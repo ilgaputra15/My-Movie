@@ -5,6 +5,7 @@ import com.gyosanila.mymovie.core.service.RetrofitService
 import com.gyosanila.mymovie.core.utils.RxUtils
 import com.gyosanila.mymovie.features.domain.api.MovieService
 import com.gyosanila.mymovie.features.domain.network.BaseResponse
+import com.gyosanila.mymovie.features.domain.network.MovieDetail
 import com.gyosanila.mymovie.features.domain.network.MovieItem
 import io.reactivex.Observable
 
@@ -18,5 +19,9 @@ class MovieRepository(private val movieApi: MovieService = RetrofitService.movie
 
     fun getMovieList() : Observable<BaseResponse<MovieItem>> {
         return movieApi.getListMovie(Constant.MovieAPIKey, 1).compose(RxUtils.applyObservableAsync())
+    }
+
+    fun getMovieDetail(idMovie: Int) : Observable<MovieDetail> {
+        return movieApi.getMovieDetail(idMovie, Constant.MovieAPIKey).compose(RxUtils.applyObservableAsync())
     }
 }

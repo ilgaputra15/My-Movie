@@ -68,4 +68,9 @@ class FragmentTvShow : Fragment(), FragmentTvShowContract.View {
     override fun showError(error: Throwable) {
         Toast.makeText(activity, "Fetch data error, ${error.message}", Toast.LENGTH_SHORT).show()
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        presenter.onDestroy()
+    }
 }
