@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.gyosanila.mymovie.R
 import com.gyosanila.mymovie.core.extension.visible
 import com.gyosanila.mymovie.features.adapter.TvShowAdapter
-import com.gyosanila.mymovie.features.movieDetail.MovieDetailActivity
+import com.gyosanila.mymovie.features.tvShowDetail.TvShowDetailActivity
 import com.gyosanila.mymovie.features.domain.network.TvShowItem
 import kotlinx.android.synthetic.main.fragment_tv_show.*
 
@@ -48,8 +48,8 @@ class FragmentTvShow : Fragment(), FragmentTvShowContract.View {
     }
 
     private fun listTvShowClicked(itemSelected: TvShowItem) {
-        val toMovieDetail = Intent(context!!, MovieDetailActivity::class.java)
-        toMovieDetail.putExtra("Movie", itemSelected)
+        val toMovieDetail = Intent(context!!, TvShowDetailActivity::class.java)
+        toMovieDetail.putExtra("TvShow", itemSelected)
         startActivity(toMovieDetail)
     }
 

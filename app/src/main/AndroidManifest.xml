@@ -16,7 +16,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme.NoActionBar"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".features.movieDetail.MovieDetailActivity">
+        <activity android:name=".features.tvShowDetail.TvShowDetailActivity">
         </activity>
         <activity
                 android:name=".features.dashboard.DashboardActivity"
@@ -29,6 +29,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+        <activity android:name=".features.movieDetail.MovieDetailActivity">
         </activity>
     </application>
 

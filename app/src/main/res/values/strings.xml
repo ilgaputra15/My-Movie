@@ -12,4 +12,8 @@
     <string name="text_vote">Vote</string>
     <string name="text_run_time">Run Time</string>
     <string name="text_popularity">Popularity</string>
+    <string name="text_homepage">Homepage</string>
+    <string name="text_session">Session</string>
+    <string name="text_created_by">Created By</string>
+    <string name="text_genres">Genres</string>
 </resources>
