@@ -28,6 +28,7 @@ data class MovieItem(
     @Json(name = "release_date") val release_date: String
 ): Parcelable
 
+@Parcelize
 data class MovieDetail(
     @Json(name = "adult") val adult: Boolean,
     @Json(name = "backdrop_path") val backdrop_path: String,
@@ -48,9 +49,10 @@ data class MovieDetail(
     @Json(name = "vote_count") val vote_count: Int,
     @Json(name = "runtime") val runtime: Int,
     @Json(name = "spoken_languages") val spoken_languages: List<Languages>
-)
+): Parcelable
 
+@Parcelize
 data class Languages(
     @Json(name = "iso_639_1") val iso_639_1: String,
     @Json(name = "name") val name: String
-)
+): Parcelable

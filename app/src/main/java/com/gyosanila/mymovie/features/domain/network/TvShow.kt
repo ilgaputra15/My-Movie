@@ -26,6 +26,7 @@ data class TvShowItem(
 ) : Parcelable
 
 
+@Parcelize
 data class TvShowDetail(
     @Json(name = "backdrop_path") val backdrop_path: String,
     @Json(name = "homepage") val homepage: String,
@@ -44,21 +45,23 @@ data class TvShowDetail(
     @Json(name = "languages") val languages: List<String>,
     @Json(name = "seasons") val seasons: List<Session>,
     @Json(name = "created_by") val created_by: List<CreateBy>
-    )
+): Parcelable
 
+@Parcelize
 data class CreateBy(
     @Json(name = "name") val name: String
-)
+): Parcelable
 
+@Parcelize
 data class Session(
     @Json(name = "name") val name: String,
     @Json(name = "overview") val overview: String,
     @Json(name = "poster_path") val poster_path: String,
     @Json(name = "season_number") val season_number: Int
-)
+): Parcelable
 
+@Parcelize
 data class Genres(
     @Json(name = "id") val id: Int,
     @Json(name = "name") val name: String
-
-)
+): Parcelable

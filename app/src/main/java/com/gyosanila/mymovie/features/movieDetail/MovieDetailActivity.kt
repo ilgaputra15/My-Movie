@@ -16,18 +16,24 @@ import java.text.DecimalFormatSymbols
 
 class MovieDetailActivity : AppCompatActivity(), MovieDetailContract.View {
 
-    private lateinit var movieDetail: MovieItem
+    private lateinit var movieItem: MovieItem
     private lateinit var presenter: MovieDetailPresenter
+    private lateinit var movieDetail: MovieDetail
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_detail)
         setupUI()
-        getDataIntent()
+        if (savedInstanceState == null) {
+            getDataIntent()
+        } else {
+            movieDetail = savedInstanceState.getParcelable("movieDetail")
+            showMovieDetail(movieDetail)
+        }
     }
 
     private fun getDataIntent() {
-        movieDetail = intent.getParcelableExtra("Movie")
+        movieItem = intent.getParcelableExtra("Movie")
         getMovieDetail()
     }
 
@@ -41,11 +47,12 @@ class MovieDetailActivity : AppCompatActivity(), MovieDetailContract.View {
     }
 
     override fun getMovieDetail() {
-        presenter.getMovieDetail(movieDetail.id)
+        presenter.getMovieDetail(movieItem.id)
     }
 
     @SuppressLint("SetTextI18n")
     override fun showMovieDetail(movieDetail: MovieDetail) {
+        this.movieDetail = movieDetail
         textTitle.text = movieDetail.title
         Glide.with(this)
             .load(Constant.ImageUrl+movieDetail.poster_path)
@@ -81,5 +88,10 @@ class MovieDetailActivity : AppCompatActivity(), MovieDetailContract.View {
     override fun onDestroy() {
         super.onDestroy()
         presenter.onDestroy()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        outState?.putParcelable("movieDetail", movieDetail)
     }
 }

@@ -15,18 +15,25 @@ import kotlinx.android.synthetic.main.activity_tv_show_detail.*
 
 class TvShowDetailActivity : AppCompatActivity(), TvShowDetailContract.View {
 
-    private lateinit var tvShowDetail: TvShowItem
+    private lateinit var tvShowItem: TvShowItem
     private lateinit var presenter: TvShowDetailPresenter
+    private lateinit var tvShowDetail: TvShowDetail
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tv_show_detail)
         setupUI()
-        getDataIntent()
+        if (savedInstanceState == null) {
+            getDataIntent()
+        } else {
+            tvShowDetail = savedInstanceState.getParcelable("tvShowDetail")
+            showTvShowDetail(tvShowDetail)
+        }
+
     }
 
     private fun getDataIntent() {
-        tvShowDetail = intent.getParcelableExtra("TvShow")
+        tvShowItem = intent.getParcelableExtra("TvShow")
         getTvShowDetail()
     }
 
@@ -40,12 +47,13 @@ class TvShowDetailActivity : AppCompatActivity(), TvShowDetailContract.View {
     }
 
     override fun getTvShowDetail() {
-        presenter.getTvShowDetail(tvShowDetail.id)
+        presenter.getTvShowDetail(tvShowItem.id)
     }
 
 
     @SuppressLint("SetTextI18n")
     override fun showTvShowDetail(tvShowDetail: TvShowDetail) {
+        this.tvShowDetail = tvShowDetail
         textTitle.text = tvShowDetail.name
         Glide.with(this)
             .load(Constant.ImageUrl+tvShowDetail.poster_path)
@@ -75,5 +83,10 @@ class TvShowDetailActivity : AppCompatActivity(), TvShowDetailContract.View {
     override fun onDestroy() {
         super.onDestroy()
         presenter.onDestroy()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        outState?.putParcelable("tvShowDetail", tvShowDetail)
     }
 }

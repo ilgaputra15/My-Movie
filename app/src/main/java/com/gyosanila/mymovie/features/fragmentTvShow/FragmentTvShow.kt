@@ -25,6 +25,7 @@ class FragmentTvShow : Fragment(), FragmentTvShowContract.View {
 
     private lateinit var tvShowAdapter: TvShowAdapter
     private lateinit var presenter: FragmentTvShowPresenter
+    private lateinit var tvShowList: ArrayList<TvShowItem>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,6 +38,12 @@ class FragmentTvShow : Fragment(), FragmentTvShowContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupUI()
+        if (savedInstanceState == null) {
+            getTvShowList()
+        } else {
+            tvShowList = savedInstanceState.getParcelableArrayList("tvShow")
+            setTvShowList(tvShowList)
+        }
     }
 
     private fun setupUI() {
@@ -44,7 +51,7 @@ class FragmentTvShow : Fragment(), FragmentTvShowContract.View {
         tvShowAdapter = TvShowAdapter { itemSelected: TvShowItem -> listTvShowClicked(itemSelected) }
         recyclerViewTvShow.layoutManager = GridLayoutManager(activity, 2)
         recyclerViewTvShow.adapter = tvShowAdapter
-        getTvShowList()
+        progressBar.visible = false
     }
 
     private fun listTvShowClicked(itemSelected: TvShowItem) {
@@ -58,7 +65,8 @@ class FragmentTvShow : Fragment(), FragmentTvShowContract.View {
     }
 
     override fun setTvShowList(tvShowList: List<TvShowItem>) {
-        tvShowAdapter.setListTvShow(tvShowList.toMutableList())
+        this.tvShowList = tvShowList as ArrayList<TvShowItem>
+        tvShowAdapter.setListTvShow(this.tvShowList)
     }
 
     override fun setProgressBar(isShow: Boolean) {
@@ -72,5 +80,10 @@ class FragmentTvShow : Fragment(), FragmentTvShowContract.View {
     override fun onDestroyView() {
         super.onDestroyView()
         presenter.onDestroy()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putParcelableArrayList("tvShow", tvShowList)
     }
 }
