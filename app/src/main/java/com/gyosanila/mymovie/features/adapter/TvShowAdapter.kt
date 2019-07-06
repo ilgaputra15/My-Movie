@@ -4,8 +4,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.gyosanila.mymovie.R
-import com.gyosanila.mymovie.features.network.Movie
+import com.gyosanila.mymovie.core.common.Constant
+import com.gyosanila.mymovie.features.domain.network.TvShowItem
 import kotlinx.android.synthetic.main.item_tv_show.view.*
 
 /**
@@ -13,11 +15,11 @@ import kotlinx.android.synthetic.main.item_tv_show.view.*
  * on Thursday, 27/06/2019 16:54
  * Division Mobile - PT.Homecareindo Global Medika
  **/
-class TvShowAdapter(private val clickListener: (Movie) -> Unit) : RecyclerView.Adapter<TvShowAdapter.TvShowHolder>() {
+class TvShowAdapter(private val clickListener: (TvShowItem) -> Unit) : RecyclerView.Adapter<TvShowAdapter.TvShowHolder>() {
 
-    private var listTvShow: ArrayList<Movie> = ArrayList()
+    private var listTvShow: MutableList<TvShowItem> = ArrayList()
 
-    fun setListTvShow(arrayList: ArrayList<Movie>) {
+    fun setListTvShow(arrayList: MutableList<TvShowItem>) {
         listTvShow = arrayList
         notifyDataSetChanged()
     }
@@ -40,8 +42,8 @@ class TvShowAdapter(private val clickListener: (Movie) -> Unit) : RecyclerView.A
 
 
     class TvShowHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(part: Movie) {
-            itemView.imageTvShow.setImageResource(part.photoResource)
+        fun bind(part: TvShowItem) {
+            Glide.with(itemView).load(Constant.ImageUrl+part.poster_path).into(itemView.imageTvShow)
         }
     }
 }

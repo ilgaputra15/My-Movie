@@ -1,18 +1,20 @@
 package com.gyosanila.mymovie.features.fragmentMovie
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gyosanila.mymovie.R
+import com.gyosanila.mymovie.core.extension.visible
 import com.gyosanila.mymovie.features.adapter.MovieAdapter
 import com.gyosanila.mymovie.features.movieDetail.MovieDetailActivity
-import com.gyosanila.mymovie.features.network.Movie
 import kotlinx.android.synthetic.main.fragment_movie.*
+import com.gyosanila.mymovie.features.domain.network.MovieItem
+
 
 /**
  * Created by ilgaputra15
@@ -20,9 +22,11 @@ import kotlinx.android.synthetic.main.fragment_movie.*
  * Division Mobile - PT.Homecareindo Global Medika
  **/
 
-class FragmentMovie : Fragment() {
+class FragmentMovie : Fragment(), FragmentMovieContract.View {
 
-    private val listMovie = ArrayList<Movie>()
+    private lateinit var movieAdapter: MovieAdapter
+    private lateinit var presenter: FragmentMoviePresenter
+    private lateinit var movieList: ArrayList<MovieItem>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,39 +39,52 @@ class FragmentMovie : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupUI()
+        if (savedInstanceState == null) {
+            getListMovie()
+        } else {
+            movieList = savedInstanceState.getParcelableArrayList("movie")
+            setMovieList(movieList)
+        }
+    }
+
+    override fun setProgressBar(isShow: Boolean) {
+        progressBar.visible = isShow
     }
 
     private fun setupUI() {
-        val movieAdapter = MovieAdapter { itemSelected: Movie -> listMovieClicked(itemSelected) }
+        presenter = FragmentMoviePresenter(this)
+        movieAdapter = MovieAdapter { itemSelected: MovieItem -> listMovieClicked(itemSelected) }
         recyclerViewMovie.layoutManager = LinearLayoutManager(activity)
         recyclerViewMovie.adapter = movieAdapter
-        movieAdapter.setListMovie(setMovieList())
+        progressBar.visible = false
     }
 
-    private fun listMovieClicked(itemSelected: Movie) {
-        val toMovieDetail = Intent(context!!, MovieDetailActivity::class.java)
+    override fun getListMovie() {
+        presenter.getListMovie()
+    }
+
+    private fun listMovieClicked(itemSelected: MovieItem) {
+        val toMovieDetail = Intent(requireContext(), MovieDetailActivity::class.java)
         toMovieDetail.putExtra("Movie", itemSelected)
         startActivity(toMovieDetail)
     }
 
-    @SuppressLint("Recycle")
-    fun setMovieList(): ArrayList<Movie> {
-        val dataTitle = resources.getStringArray(R.array.data_title)
-        val dataDescription = resources.getStringArray(R.array.data_description)
-        val dataPhoto = resources.obtainTypedArray(R.array.data_photo)
-        val dataPublish = resources.getStringArray(R.array.data_publish_at)
-        val dataDirector = resources.getStringArray(R.array.data_director)
-        for (data in 0 until dataTitle.size) {
-            val hero = Movie(
-                data,
-                dataTitle[data],
-                dataDescription[data],
-                dataPhoto.getResourceId(data, -1),
-                dataPublish[data],
-                dataDirector[data]
-            )
-            listMovie.add(hero)
-        }
-        return listMovie
+    override fun setMovieList(movieList: List<MovieItem>) {
+        this.movieList = movieList as ArrayList<MovieItem>
+        movieAdapter.setListMovie(this.movieList)
+    }
+
+    override fun showError(error: Throwable) {
+        Toast.makeText(activity, "Fetch data error, ${error.message}", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        presenter.onDestroy()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putParcelableArrayList("movie", movieList)
     }
 }

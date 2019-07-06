@@ -6,8 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <FrameLayout
-            style="@style/CardView.Corner6DpWhite"
+    <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
@@ -16,7 +15,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="8dp"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp">
+            app:cardCornerRadius="6dp"
+            android:layout_marginEnd="16dp" android:layout_marginTop="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -63,6 +63,6 @@
                         tools:text='Miles Morales is juggling his life between being a high school student and being a spider-man. When Wilson "Kingpin" Fisk uses a super collider, others from across the Spider-Verse are transported to this dimension'/>
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </FrameLayout>
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
