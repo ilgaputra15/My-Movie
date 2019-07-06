@@ -1,11 +1,7 @@
 package com.gyosanila.mymovie.features.tvShowDetail
 
-import com.gyosanila.mymovie.features.domain.network.MovieDetail
 import com.gyosanila.mymovie.features.domain.network.TvShowDetail
-import com.gyosanila.mymovie.features.domain.repository.MovieRepository
 import com.gyosanila.mymovie.features.domain.repository.TvShowRepository
-import com.gyosanila.mymovie.features.tvShowDetail.TvShowDetailActivity
-import com.gyosanila.mymovie.features.tvShowDetail.TvShowDetailContract
 import io.reactivex.disposables.Disposable
 
 /**

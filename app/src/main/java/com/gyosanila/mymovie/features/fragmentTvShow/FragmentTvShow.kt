@@ -55,7 +55,7 @@ class FragmentTvShow : Fragment(), FragmentTvShowContract.View {
     }
 
     private fun listTvShowClicked(itemSelected: TvShowItem) {
-        val toMovieDetail = Intent(context!!, TvShowDetailActivity::class.java)
+        val toMovieDetail = Intent(requireContext(), TvShowDetailActivity::class.java)
         toMovieDetail.putExtra("TvShow", itemSelected)
         startActivity(toMovieDetail)
     }
