@@ -14,6 +14,7 @@ import com.gyosanila.mymovie.features.adapter.MovieAdapter
 import com.gyosanila.mymovie.features.movieDetail.MovieDetailActivity
 import kotlinx.android.synthetic.main.fragment_movie.*
 import com.gyosanila.mymovie.features.domain.network.MovieItem
+import kotlinx.android.synthetic.main.activity_dashboard.*
 
 
 /**
@@ -27,6 +28,7 @@ class FragmentMovie : Fragment(), FragmentMovieContract.View {
     private lateinit var movieAdapter: MovieAdapter
     private lateinit var presenter: FragmentMoviePresenter
     private lateinit var movieList: ArrayList<MovieItem>
+    var isFavoriteFragment = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
