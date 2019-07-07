@@ -51,6 +51,7 @@ class MovieDetailActivity : AppCompatActivity(), MovieDetailContract.View {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_add -> {
+                toastAddFavorites(!isFavorite)
                 if (isFavorite) {
                     movieViewModel.deleteMovieById(movieItem.id)
                     setIconFavorite(false)
@@ -64,12 +65,12 @@ class MovieDetailActivity : AppCompatActivity(), MovieDetailContract.View {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun getDataIntent() {
+    override fun getDataIntent() {
         movieItem = intent.getParcelableExtra("Movie")
         getMovieDetail()
     }
 
-    private fun setupUI() {
+    override fun setupUI() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
@@ -82,14 +83,20 @@ class MovieDetailActivity : AppCompatActivity(), MovieDetailContract.View {
         })
     }
 
-    private fun setFavorite(listMovie: List<MovieItem>) {
+    override fun setFavorite(listMovie: List<MovieItem>) {
         if (listMovie.isNotEmpty())
             for (item in listMovie) {
                 if (item.id == movieItem.id) setIconFavorite(true)
             }
+
     }
 
-    private fun setIconFavorite(isFavorite: Boolean) {
+    override fun toastAddFavorites(isAdd: Boolean) {
+        if (isAdd) Toast.makeText(this, getString(R.string.text_success_add_favorites), Toast.LENGTH_SHORT).show()
+        else Toast.makeText(this, getString(R.string.text_success_remove_favorites), Toast.LENGTH_SHORT).show()
+    }
+
+    override fun setIconFavorite(isFavorite: Boolean) {
         this.isFavorite = isFavorite
         val icon = if (isFavorite) getDrawable(R.drawable.ic_outline_favorite_full)
         else getDrawable(R.drawable.ic_outline_favorite)

@@ -48,6 +48,7 @@ class TvShowDetailActivity : AppCompatActivity(), TvShowDetailContract.View {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_add -> {
+                toastAddFavorites(!isFavorite)
                 if (isFavorite) {
                     tvShowViewModel.deleteTvShowById(tvShowItem.id)
                     setIconFavorite(false)
@@ -61,12 +62,12 @@ class TvShowDetailActivity : AppCompatActivity(), TvShowDetailContract.View {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun getDataIntent() {
+    override fun getDataIntent() {
         tvShowItem = intent.getParcelableExtra("TvShow")
         getTvShowDetail()
     }
 
-    private fun setupUI() {
+    override fun setupUI() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
@@ -79,18 +80,23 @@ class TvShowDetailActivity : AppCompatActivity(), TvShowDetailContract.View {
         })
     }
 
-    private fun setFavorite(listTvShow: List<TvShowItem>) {
+    override fun setFavorite(listTvShow: List<TvShowItem>) {
         if (listTvShow.isNotEmpty())
             for (item in listTvShow) {
                 if (item.id == tvShowItem.id) setIconFavorite(true)
             }
     }
 
-    private fun setIconFavorite(isFavorite: Boolean) {
+    override fun setIconFavorite(isFavorite: Boolean) {
         this.isFavorite = isFavorite
         val icon = if (isFavorite) getDrawable(R.drawable.ic_outline_favorite_full)
         else getDrawable(R.drawable.ic_outline_favorite)
         if (::menu.isInitialized) menu.getItem(0).icon = icon
+    }
+
+    override fun toastAddFavorites(isAdd: Boolean) {
+        if (isAdd) Toast.makeText(this, getString(R.string.text_success_add_favorites), Toast.LENGTH_SHORT).show()
+        else Toast.makeText(this, getString(R.string.text_success_remove_favorites), Toast.LENGTH_SHORT).show()
     }
 
     override fun getTvShowDetail() {

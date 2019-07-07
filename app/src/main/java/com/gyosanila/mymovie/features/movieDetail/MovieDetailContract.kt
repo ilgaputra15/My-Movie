@@ -17,9 +17,14 @@ class MovieDetailContract {
     }
 
     interface View {
+        fun getDataIntent()
+        fun setupUI()
         fun getMovieDetail()
+        fun setFavorite(listMovie: List<MovieItem>)
         fun showMovieDetail(movieDetail: MovieDetail)
         fun setProgressBar(isShow: Boolean)
+        fun setIconFavorite(isFavorite: Boolean)
         fun showError(error: Throwable)
+        fun toastAddFavorites(isAdd: Boolean)
     }
 }
