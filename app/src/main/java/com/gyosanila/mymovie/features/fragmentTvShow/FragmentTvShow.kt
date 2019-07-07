@@ -84,6 +84,6 @@ class FragmentTvShow : Fragment(), FragmentTvShowContract.View {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putParcelableArrayList("tvShow", tvShowList)
+        if (!tvShowList.isNullOrEmpty()) outState.putParcelableArrayList("tvShow", tvShowList)
     }
 }

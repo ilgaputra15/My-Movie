@@ -3,11 +3,9 @@ package com.gyosanila.mymovie.features.movieDetail
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.BoringLayout
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import androidx.core.view.isNotEmpty
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
@@ -26,7 +24,7 @@ class MovieDetailActivity : AppCompatActivity(), MovieDetailContract.View {
     private lateinit var movieItem: MovieItem
     private lateinit var presenter: MovieDetailPresenter
     private lateinit var movieDetail: MovieDetail
-    private lateinit var wordViewModel: MovieViewModel
+    private lateinit var movieViewModel: MovieViewModel
     private lateinit var menu: Menu
     private var isFavorite: Boolean = false
 
@@ -54,10 +52,10 @@ class MovieDetailActivity : AppCompatActivity(), MovieDetailContract.View {
         when (item.itemId) {
             R.id.action_add -> {
                 if (isFavorite) {
-                    wordViewModel.deleteMovieById(movieItem.id)
+                    movieViewModel.deleteMovieById(movieItem.id)
                     setIconFavorite(false)
                 } else {
-                    wordViewModel.insert(movieItem)
+                    movieViewModel.insert(movieItem)
                     setIconFavorite(true)
                 }
                 return true
@@ -78,8 +76,8 @@ class MovieDetailActivity : AppCompatActivity(), MovieDetailContract.View {
         toolbar.setNavigationOnClickListener { onBackPressed() }
         presenter = MovieDetailPresenter(this)
         scrollView.visible = false
-        wordViewModel = ViewModelProviders.of(this).get(MovieViewModel::class.java)
-        wordViewModel.allMovies.observe(this, Observer { listMovie ->
+        movieViewModel = ViewModelProviders.of(this).get(MovieViewModel::class.java)
+        movieViewModel.allMovies.observe(this, Observer { listMovie ->
             setFavorite(listMovie)
         })
     }

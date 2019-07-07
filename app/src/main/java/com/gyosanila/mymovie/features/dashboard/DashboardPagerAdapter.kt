@@ -14,7 +14,9 @@ import com.gyosanila.mymovie.features.fragmentTvShow.FragmentTvShow
  * Division Mobile - PT.Homecareindo Global Medika
  **/
 
-class DashboardPagerAdapter(private val context: Context, fm: FragmentManager): FragmentPagerAdapter(fm) {
+class DashboardPagerAdapter(
+    private val context: Context, fm: FragmentManager
+): FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     private val pages = listOf(
         FragmentMovie(),

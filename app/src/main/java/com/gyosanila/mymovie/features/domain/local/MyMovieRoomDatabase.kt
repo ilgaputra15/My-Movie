@@ -5,15 +5,16 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import android.content.Context
 import com.gyosanila.mymovie.features.domain.network.MovieItem
+import com.gyosanila.mymovie.features.domain.network.TvShowItem
 
 /**
  * This is the backend. The database. This used to be done by the OpenHelper.
  * The fact that this has very few comments emphasizes its coolness.
  */
-@Database(entities = [MovieItem::class], version = 1)
+@Database(entities = [MovieItem::class, TvShowItem::class], version = 1)
 abstract class MyMovieRoomDatabase : RoomDatabase() {
 
-    abstract fun movieDao(): MovieDao
+    abstract fun movieDao(): MyMovieDao
 
     companion object {
 
