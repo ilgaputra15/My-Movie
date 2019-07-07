@@ -16,6 +16,6 @@
     <string name="text_session">Session</string>
     <string name="text_created_by">Created By</string>
     <string name="text_genres">Genres</string>
-    <string name="text_favorite">Favorite</string>
+    <string name="text_favorite">Favorites</string>
     <string name="text_no_data">No Data</string>
 </resources>

@@ -23,7 +23,7 @@ import com.gyosanila.mymovie.features.domain.network.MovieItem
  * Division Mobile - PT.Homecareindo Global Medika
  **/
 
-class FragmentMovieFavorites : Fragment(), FragmentMovieHistoryContract.View {
+class FragmentMovieFavorites : Fragment(), FragmentMovieFavoritesContract.View {
 
     private lateinit var movieAdapter: MovieAdapter
     private lateinit var movieViewModel: FragmentMovieViewModel

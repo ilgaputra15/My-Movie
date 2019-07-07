@@ -8,7 +8,7 @@ import com.gyosanila.mymovie.features.domain.network.MovieItem
  * Division Mobile - PT.Homecareindo Global Medika
  **/
 
-class FragmentMovieHistoryContract {
+class FragmentMovieFavoritesContract {
     interface View {
         fun setMovieList(movieList: List<MovieItem>)
     }
