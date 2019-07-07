@@ -1,6 +1,7 @@
 package com.gyosanila.mymovie.features.movieDetail
 
 import com.gyosanila.mymovie.features.domain.network.MovieDetail
+import com.gyosanila.mymovie.features.domain.network.MovieItem
 
 /**
  * Created by ilgaputra15
@@ -12,6 +13,7 @@ class MovieDetailContract {
     interface Presenter {
         fun getMovieDetail(idMovie: Int)
         fun onDestroy()
+        fun setFavorite(movie: MovieItem)
     }
 
     interface View {

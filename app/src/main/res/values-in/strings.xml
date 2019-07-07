@@ -16,5 +16,6 @@
     <string name="text_session">Episode</string>
     <string name="text_created_by">Pembuat Cerita</string>
     <string name="text_genres">Aliran Film</string>
+    <string name="text_favorite">favorit</string>
 
 </resources>
