@@ -5,8 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.gyosanila.mymovie.R
 import com.gyosanila.mymovie.features.adapter.PagerAdapter
 import com.gyosanila.mymovie.features.domain.network.Pager
-import com.gyosanila.mymovie.features.fragmentMovie.FragmentMovie
-import com.gyosanila.mymovie.features.fragmentTvShow.FragmentTvShow
+import com.gyosanila.mymovie.features.fragmentMovieFavorites.FragmentMovieFavorites
 import kotlinx.android.synthetic.main.activity_favorites.*
 
 /**
@@ -26,9 +25,10 @@ class FavoritesActivity : AppCompatActivity() {
     private fun setupUI() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toolbar.setNavigationOnClickListener { onBackPressed() }
         val pager = ArrayList<Pager>()
-        pager.add(Pager(getString(R.string.text_title_movie), FragmentMovie()))
-        pager.add(Pager(getString(R.string.text_title_tv_show), FragmentTvShow()))
+        pager.add(Pager(getString(R.string.text_title_movie), FragmentMovieFavorites()))
         viewPagerFavorites.adapter = PagerAdapter(pager, supportFragmentManager)
         tabLayout.setupWithViewPager(viewPagerFavorites)
     }

@@ -1,12 +1,13 @@
-package com.gyosanila.mymovie.features.fragmentMovie
+package com.gyosanila.mymovie.features.fragmentMovieFavorites
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gyosanila.mymovie.R
 import com.gyosanila.mymovie.core.extension.visible
@@ -22,11 +23,10 @@ import com.gyosanila.mymovie.features.domain.network.MovieItem
  * Division Mobile - PT.Homecareindo Global Medika
  **/
 
-class FragmentMovie : Fragment(), FragmentMovieContract.View {
+class FragmentMovieFavorites : Fragment(), FragmentMovieHistoryContract.View {
 
     private lateinit var movieAdapter: MovieAdapter
-    private lateinit var presenter: FragmentMoviePresenter
-    private lateinit var movieList: ArrayList<MovieItem>
+    private lateinit var movieViewModel: FragmentMovieViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,27 +39,16 @@ class FragmentMovie : Fragment(), FragmentMovieContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupUI()
-        if (savedInstanceState == null) {
-            getListMovie()
-        } else {
-            movieList = savedInstanceState.getParcelableArrayList("movie")
-            setMovieList(movieList)
-        }
-    }
-
-    override fun setProgressBar(isShow: Boolean) {
-        progressBar.visible = isShow
     }
 
     private fun setupUI() {
-        presenter = FragmentMoviePresenter(this)
         movieAdapter = MovieAdapter { itemSelected: MovieItem -> listMovieClicked(itemSelected) }
         recyclerViewMovie.layoutManager = LinearLayoutManager(activity)
         recyclerViewMovie.adapter = movieAdapter
-    }
-
-    override fun getListMovie() {
-        presenter.getListMovie()
+        movieViewModel = ViewModelProviders.of(this).get(FragmentMovieViewModel::class.java)
+        movieViewModel.allMovie.observe(this, Observer { listMovie ->
+            setMovieList(listMovie)
+        })
     }
 
     private fun listMovieClicked(itemSelected: MovieItem) {
@@ -69,22 +58,7 @@ class FragmentMovie : Fragment(), FragmentMovieContract.View {
     }
 
     override fun setMovieList(movieList: List<MovieItem>) {
-        this.movieList = movieList as ArrayList<MovieItem>
-        movieAdapter.setListMovie(this.movieList)
-    }
-
-    override fun showError(error: Throwable) {
-        textError.visible = true
-        Toast.makeText(activity, "Fetch data error, ${error.message}", Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        presenter.onDestroy()
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putParcelableArrayList("movie", movieList)
+        if (movieList.isEmpty()) textError.visible = true
+        movieAdapter.setListMovie(movieList.toMutableList())
     }
 }
