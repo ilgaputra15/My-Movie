@@ -1,8 +1,7 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 androidExtensions {
     experimental = true
@@ -26,6 +25,14 @@ android {
     }
 }
 
+ext {
+    roomVersion = '2.1.0-alpha06'
+    archLifecycleVersion = '2.1.0-alpha04'
+    androidxArchVersion = '2.0.0'
+    coroutines = '1.2.0'
+}
+
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -45,5 +52,17 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
 
+    // Room components
+    implementation "androidx.room:room-runtime:2.1.0"
+    implementation "androidx.room:room-ktx:2.1.0"
+    kapt "androidx.room:room-compiler:2.1.0"
+    androidTestImplementation "androidx.room:room-testing:2.1.0"
 
+// Lifecycle components
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0-alpha02"
+    kapt "androidx.lifecycle:lifecycle-compiler:2.2.0-alpha02"
+    androidTestImplementation "androidx.arch.core:core-testing:2.0.1"
+
+// ViewModel Kotlin support
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-alpha02"
 }

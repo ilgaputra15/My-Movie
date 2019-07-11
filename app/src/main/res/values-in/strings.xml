@@ -16,5 +16,9 @@
     <string name="text_session">Episode</string>
     <string name="text_created_by">Pembuat Cerita</string>
     <string name="text_genres">Aliran Film</string>
+    <string name="text_favorite">favorit</string>
+    <string name="text_no_data">Tidak Ada Data</string>
+    <string name="text_success_add_favorites">Berhasil menambahkan ke favorit</string>
+    <string name="text_success_remove_favorites">Berhasil menghapus dari favorit</string>
 
 </resources>

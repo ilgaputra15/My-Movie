@@ -16,13 +16,6 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme.NoActionBar"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".features.tvShowDetail.TvShowDetailActivity">
-        </activity>
-        <activity
-                android:name=".features.dashboard.DashboardActivity"
-                android:label="@string/title_activity_dashboard"
-                android:theme="@style/AppTheme.NoActionBar.NoActionBar">
-        </activity>
         <activity android:name=".features.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -30,8 +23,14 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".features.movieDetail.MovieDetailActivity">
+        <activity
+                android:name=".features.dashboard.DashboardActivity"
+                android:label="@string/title_activity_dashboard"
+                android:theme="@style/AppTheme.NoActionBar.NoActionBar">
         </activity>
+        <activity android:name=".features.movieDetail.MovieDetailActivity"/>
+        <activity android:name=".features.tvShowDetail.TvShowDetailActivity"/>
+        <activity android:name=".features.favorites.FavoritesActivity"/>
     </application>
 
 </manifest>

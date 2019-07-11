@@ -1,6 +1,7 @@
 package com.gyosanila.mymovie.features.movieDetail
 
 import com.gyosanila.mymovie.features.domain.network.MovieDetail
+import com.gyosanila.mymovie.features.domain.network.MovieItem
 import com.gyosanila.mymovie.features.domain.repository.MovieRepository
 import io.reactivex.disposables.Disposable
 
@@ -26,6 +27,9 @@ class MovieDetailPresenter(
                 this::onSuccessGetTvShowList,
                 this::onFailureGetTvShowList
             )
+    }
+
+    override fun setFavorite(movie: MovieItem) {
     }
 
     private fun onSuccessGetTvShowList(movieDetail: MovieDetail) {
