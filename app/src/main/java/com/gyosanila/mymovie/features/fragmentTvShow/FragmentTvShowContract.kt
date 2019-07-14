@@ -11,13 +11,16 @@ import com.gyosanila.mymovie.features.domain.network.TvShowItem
 class FragmentTvShowContract {
     interface Presenter {
         fun getTvShowList()
+        fun searchTvShow(query: String)
         fun onDestroy()
     }
 
     interface View {
         fun getTvShowList()
+        fun searchTvShow(query: String)
         fun setProgressBar(isShow: Boolean)
         fun setTvShowList(tvShowList: List<TvShowItem>)
+        fun setSearchTvShow(tvShowList: List<TvShowItem>)
         fun showError(error: Throwable)
     }
 }

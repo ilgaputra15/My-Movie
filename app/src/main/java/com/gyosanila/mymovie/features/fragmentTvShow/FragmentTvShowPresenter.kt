@@ -26,7 +26,19 @@ class FragmentTvShowPresenter(
             }
             .subscribe(
                 this::onSuccessGetTvShowList,
-                this::onFailureGetTvShowList
+                this::onFailureGetTvShow
+            )
+    }
+
+    override fun searchTvShow(query: String) {
+        subscriber = tvShowRepository.searchTvShow(query)
+            .doOnSubscribe{ view.setProgressBar(true) }
+            .doAfterTerminate{
+                view.setProgressBar(false)
+            }
+            .subscribe(
+                this::onSuccessSearchTvShow,
+                this::onFailureGetTvShow
             )
     }
 
@@ -34,7 +46,11 @@ class FragmentTvShowPresenter(
         view.setTvShowList(tvShowList.results)
     }
 
-    private fun onFailureGetTvShowList(error: Throwable) {
+    private fun onSuccessSearchTvShow(tvShowList: BaseResponse<TvShowItem>) {
+        view.setSearchTvShow(tvShowList.results)
+    }
+
+    private fun onFailureGetTvShow(error: Throwable) {
         view.showError(error)
     }
 

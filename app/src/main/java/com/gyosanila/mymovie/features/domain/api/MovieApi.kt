@@ -20,6 +20,12 @@ interface MovieService {
         @Query("page") page: Int
     ) : Observable<BaseResponse<MovieItem>>
 
+    @GET("3/search/movie")
+    fun searchMovie(
+        @Query("api_key") api_key: String,
+        @Query("query") query: String
+    ) : Observable<BaseResponse<MovieItem>>
+
     @GET("3/movie/{idMovie}")
     fun getMovieDetail(
         @Path("idMovie") idMovie: Int,
