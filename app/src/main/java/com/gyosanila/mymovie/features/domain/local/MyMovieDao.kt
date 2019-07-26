@@ -48,6 +48,9 @@ interface MyMovieDao {
     @Query("DELETE FROM tv_show_table")
     fun deleteAllMovie()
 
+    @Query("SELECT * from movie_table ORDER BY id ASC")
+    fun getMoviesFavorites(): List<MovieItem>
+
 
 
 

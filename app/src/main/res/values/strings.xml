@@ -23,4 +23,6 @@
     <string name="text_search_movie">Search the Movie</string>
     <string name="text_search_tv_show">Search The Tv Show</string>
     <string name="text_not_found_search">Didn\'t find matching search results</string>
+    <string name="appwidget_text">My Favorites Movie</string>
+    <string name="text_no_data_favorites">Tidak ada data fovorites</string>
 </resources>

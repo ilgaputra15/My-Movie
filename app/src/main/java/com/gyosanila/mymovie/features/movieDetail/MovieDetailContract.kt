@@ -19,6 +19,7 @@ class MovieDetailContract {
     interface View {
         fun getDataIntent()
         fun setupUI()
+        fun updateWidget()
         fun getMovieDetail()
         fun setFavorite(listMovie: List<MovieItem>)
         fun showMovieDetail(movieDetail: MovieDetail)
