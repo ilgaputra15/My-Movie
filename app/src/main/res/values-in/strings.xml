@@ -25,5 +25,13 @@
     <string name="text_not_found_search">Tidak menemukan hasil pencarian yang cocok</string>
     <string name="appwidget_text">Film Favorit Saya</string>
     <string name="text_no_data_favorites">Tidak ada data fovorites</string>
+    <string name="setting_daily_remainder">Pengingat Harian</string>
+    <string name="setting_daily_remainder_detail">Pengingat kembali ke aplikasi</string>
+
+    <string name="setting_release_remainder">Pengingat Release</string>
+    <string name="setting_release_remainder_detail">Pengingat film terbaru hari ini</string>
+    <string name="text_settings">Pengaturan</string>
+    <string name="text_release_remainder">Hei, %s telah rilis hari ini!</string>
+    <string name="text_message_alarm_release">Hai, Sudah liat film hari ini belum</string>
 
 </resources>

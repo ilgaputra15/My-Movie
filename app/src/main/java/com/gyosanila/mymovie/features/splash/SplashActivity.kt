@@ -12,6 +12,9 @@ import android.app.job.JobInfo
 import com.gyosanila.mymovie.features.widget.UpdateWidgetService
 import android.content.ComponentName
 import android.content.Context
+import com.gyosanila.mymovie.core.common.Alarm
+import com.gyosanila.mymovie.core.service.AlarmReceiver
+import com.gyosanila.mymovie.features.domain.local.SharedPreferences
 
 
 class SplashActivity : AppCompatActivity() {
@@ -22,6 +25,7 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         startJob()
+        setAlarm()
         setFullScreen()
         counterToDashboard()
     }
@@ -54,5 +58,27 @@ class SplashActivity : AppCompatActivity() {
     fun navigateToDashboard() {
         startActivity(Intent(this, DashboardActivity::class.java))
         finish()
+    }
+
+    private fun setAlarm() {
+        val sharedPreferences = SharedPreferences(this)
+        if (sharedPreferences.isFirstTime) {
+            sharedPreferences.isFirstTime = false
+            sharedPreferences.dailyRemainder = true
+            sharedPreferences.releaseRemainder = true
+            val alarm = AlarmReceiver()
+            alarm.setRepeatingAlarm(
+                this,
+                AlarmReceiver.REQUEST_RELEASE,
+                Alarm.TIME_RELEASE
+            )
+            alarm.setRepeatingAlarm(
+                this,
+                AlarmReceiver.REQUEST_DAILY,
+                Alarm.TIME_DAILY,
+                getString(R.string.app_name),
+                getString(R.string.text_message_alarm_release)
+            )
+        }
     }
 }

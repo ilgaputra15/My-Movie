@@ -15,6 +15,7 @@ import com.gyosanila.mymovie.features.domain.network.Pager
 import com.gyosanila.mymovie.features.favorites.FavoritesActivity
 import com.gyosanila.mymovie.features.fragmentMovie.FragmentMovie
 import com.gyosanila.mymovie.features.fragmentTvShow.FragmentTvShow
+import com.gyosanila.mymovie.features.settings.SettingsActivity
 
 class DashboardActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -52,9 +53,9 @@ class DashboardActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.action_change_settings) {
-            val mIntent = Intent(ACTION_LOCALE_SETTINGS)
-            startActivity(mIntent)
+        if (item.itemId == R.id.actionSettings) {
+            val settings = Intent(this, SettingsActivity::class.java)
+            startActivity(settings)
             return true
         }
         return super.onOptionsItemSelected(item)

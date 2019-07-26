@@ -28,4 +28,8 @@ class MovieRepository(private val movieApi: MovieService = RetrofitService.movie
     fun getMovieDetail(idMovie: Int) : Observable<MovieDetail> {
         return movieApi.getMovieDetail(idMovie, Constant.MovieAPIKey).compose(RxUtils.applyObservableAsync())
     }
+
+    fun getDiscovery(releaseDate: String): Observable<BaseResponse<MovieItem>> {
+        return movieApi.getDiscovery(Constant.MovieAPIKey, releaseDate, releaseDate).compose(RxUtils.applyObservableAsync())
+    }
 }

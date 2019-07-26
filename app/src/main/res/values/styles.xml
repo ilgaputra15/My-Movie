@@ -28,4 +28,37 @@
         <item name="android:gravity">center_horizontal</item>
     </style>
 
+    <style name="TextView" parent="android:TextAppearance">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:gravity">left</item>
+    </style>
+
+    <!--___________ TEXT SIZE ___________-->
+
+    <style name="TextView.Medium" parent="TextView">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextView.Big" parent="TextView">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="TextView.ExtraBig" parent="TextView">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <!--___________ TEXT BOLD ___________-->
+
+    <style name="TextView.MediumBold" parent="TextView.Medium">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextView.Big.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextView.ExtraBigBold" parent="TextView.ExtraBig">
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>
