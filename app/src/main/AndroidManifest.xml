@@ -10,6 +10,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
+    <permission android:name="com.gyosanila.mymovie.READ_DATABASE" android:protectionLevel="normal"/>
+    <permission android:name="com.gyosanila.mymovie.WRITE_DATABASE" android:protectionLevel="normal"/>
+
 
     <application
             android:allowBackup="false"
@@ -19,8 +22,13 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme.NoActionBar"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".features.settings.SettingsActivity">
-        </activity>
+
+        <provider
+                android:authorities="com.gyosanila.mymovie"
+                android:name=".features.domain.local.MyMovieProvider"
+                android:exported="true"
+                android:readPermission="com.gyosanila.mymovie.READ_DATABASE"
+                android:writePermission="com.gyosanila.mymovie.WRITE_DATABASE" />
 
         <receiver android:name=".features.widget.MyMovieWidget">
             <intent-filter>
@@ -61,6 +69,7 @@
         <activity android:name=".features.movieDetail.MovieDetailActivity"/>
         <activity android:name=".features.tvShowDetail.TvShowDetailActivity"/>
         <activity android:name=".features.favorites.FavoritesActivity"/>
+        <activity android:name=".features.settings.SettingsActivity"/>
     </application>
 
 </manifest>
