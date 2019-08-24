@@ -26,8 +26,21 @@ class FragmentMoviePresenter(
             }
             .subscribe(
                 this::onSuccessGetMovieList,
-                this::onFailureGetMovieList
+                this::onFailureGetMovie
             )
+    }
+
+    override fun searchMovie(query: String) {
+        subscriber = movieRepository.searchMovie(query)
+            .doOnSubscribe{ view.setProgressBar(true) }
+            .doAfterTerminate{
+                view.setProgressBar(false)
+            }
+            .subscribe(
+                this::onSuccessSearchMovie,
+                this::onFailureGetMovie
+            )
+
     }
 
     override fun onDestroy() {
@@ -38,7 +51,11 @@ class FragmentMoviePresenter(
         view.setMovieList(movieList.results)
     }
 
-    private fun onFailureGetMovieList(error: Throwable) {
+    private fun onSuccessSearchMovie(movieList: BaseResponse<MovieItem>) {
+        view.setSearchMovie(movieList.results)
+    }
+
+    private fun onFailureGetMovie(error: Throwable) {
         view.showError(error)
     }
 

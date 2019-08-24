@@ -11,13 +11,16 @@ import com.gyosanila.mymovie.features.domain.network.MovieItem
 class FragmentMovieContract {
     interface Presenter {
         fun getListMovie()
+        fun searchMovie(query: String)
         fun onDestroy()
     }
 
     interface View {
         fun getListMovie()
+        fun searchMovie(query: String)
         fun setProgressBar(isShow: Boolean)
         fun setMovieList(movieList: List<MovieItem>)
+        fun setSearchMovie(movieList: List<MovieItem>)
         fun showError(error: Throwable)
     }
 }

@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-            android:id="@+id/action_change_settings"
-            android:title="@string/change_language_settings"
+            android:id="@+id/actionSettings"
+            android:title="@string/text_settings"
             app:showAsAction="never"/>
 </menu>

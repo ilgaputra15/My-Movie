@@ -21,6 +21,10 @@ class TvShowRepository(private val tvShowApi: TvShowApi = RetrofitService.movieA
         return tvShowApi.getListTvShow(Constant.MovieAPIKey, 1).compose(RxUtils.applyObservableAsync())
     }
 
+    fun searchTvShow(query: String) : Observable<BaseResponse<TvShowItem>> {
+        return tvShowApi.searchTvShow(Constant.MovieAPIKey, query).compose(RxUtils.applyObservableAsync())
+    }
+
     fun getTvShowDetail(id: Int) : Observable<TvShowDetail> {
         return tvShowApi.getTvShowDetail(id, Constant.MovieAPIKey).compose(RxUtils.applyObservableAsync())
     }

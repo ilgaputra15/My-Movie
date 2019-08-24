@@ -1,6 +1,8 @@
 package com.gyosanila.mymovie.features.movieDetail
 
 import android.annotation.SuppressLint
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -14,6 +16,7 @@ import com.gyosanila.mymovie.core.common.Constant
 import com.gyosanila.mymovie.core.extension.visible
 import com.gyosanila.mymovie.features.domain.network.MovieDetail
 import com.gyosanila.mymovie.features.domain.network.MovieItem
+import com.gyosanila.mymovie.features.widget.MyMovieWidget
 import kotlinx.android.synthetic.main.activity_movie_detail.*
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
@@ -59,6 +62,7 @@ class MovieDetailActivity : AppCompatActivity(), MovieDetailContract.View {
                     movieViewModel.insert(movieItem)
                     setIconFavorite(true)
                 }
+                updateWidget()
                 return true
             }
         }
@@ -150,5 +154,12 @@ class MovieDetailActivity : AppCompatActivity(), MovieDetailContract.View {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         if (::movieDetail.isInitialized) outState.putParcelable("movieDetail", movieDetail)
+    }
+
+    override fun updateWidget() {
+        val manager = AppWidgetManager.getInstance(this)
+        val theWidget = ComponentName(this, MyMovieWidget::class.java)
+        val id = manager.getAppWidgetIds(theWidget)
+        manager.notifyAppWidgetViewDataChanged(id, R.id.stack_view)
     }
 }

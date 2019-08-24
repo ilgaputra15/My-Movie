@@ -26,7 +26,7 @@
                     android:gravity="center"
                     android:textColor="@color/white"
                     android:textSize="20sp"
-                    android:id="@+id/toolbar_title"
+                    android:id="@+id/toolbarTitle"
                     android:textStyle="bold"
                     android:text="@string/text_home"/>
         </androidx.appcompat.widget.Toolbar>

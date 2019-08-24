@@ -18,11 +18,24 @@ interface MovieService {
     fun getListMovie(
         @Query("api_key") api_key: String,
         @Query("page") page: Int
-    ) : Observable<BaseResponse<MovieItem>>
+    ): Observable<BaseResponse<MovieItem>>
+
+    @GET("3/search/movie")
+    fun searchMovie(
+        @Query("api_key") api_key: String,
+        @Query("query") query: String
+    ): Observable<BaseResponse<MovieItem>>
 
     @GET("3/movie/{idMovie}")
     fun getMovieDetail(
         @Path("idMovie") idMovie: Int,
         @Query("api_key") api_key: String
-    ) : Observable<MovieDetail>
+    ): Observable<MovieDetail>
+
+    @GET("3/discover/movie")
+    fun getDiscovery(
+        @Query("api_key") api_key: String,
+        @Query("primary_release_date.gte") startDate: String,
+        @Query("primary_release_date.lte") endDate: String
+    ): Observable<BaseResponse<MovieItem>>
 }

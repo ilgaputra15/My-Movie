@@ -16,6 +16,9 @@ class MyMovieRepository(private val myMovieDao: MyMovieDao) {
     val allMovies: LiveData<List<MovieItem>> = myMovieDao.getAllMovies()
     val allTvShow: LiveData<List<TvShowItem>> = myMovieDao.getAllTvShow()
 
+    fun getMovieFavorites() : List<MovieItem> {
+        return myMovieDao.getMoviesFavorites()
+    }
     suspend fun insertMovie(movie: MovieItem) {
         myMovieDao.insertMovie(movie)
     }

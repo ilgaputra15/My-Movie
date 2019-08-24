@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.gyosanila.mymovie.R
@@ -52,6 +54,44 @@ class FragmentTvShow : Fragment(), FragmentTvShowContract.View {
         recyclerViewTvShow.layoutManager = GridLayoutManager(activity, 2)
         recyclerViewTvShow.adapter = tvShowAdapter
         progressBar.visible = false
+        swipeRefresh.setColorSchemeColors(ContextCompat.getColor(requireContext(), R.color.colorPrimaryDark))
+        swipeRefresh.setOnRefreshListener {
+            getTvShowList()
+            searchView.setQuery("", false)
+            swipeRefresh.isRefreshing = false
+        }
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(query: String): Boolean { return true }
+            override fun onQueryTextSubmit(query: String): Boolean {
+                searchTvShow(query)
+                return true
+            }
+        })
+        searchView.setOnCloseListener {
+            getTvShowList()
+            false
+        }
+    }
+
+    override fun getTvShowList() {
+        presenter.getTvShowList()
+    }
+
+    override fun searchTvShow(query: String) {
+        presenter.searchTvShow(query)
+    }
+
+    override fun setTvShowList(tvShowList: List<TvShowItem>) {
+        textError.visible = tvShowList.isEmpty()
+        this.tvShowList = tvShowList as ArrayList<TvShowItem>
+        tvShowAdapter.setListTvShow(this.tvShowList)
+    }
+
+    override fun setSearchTvShow(tvShowList: List<TvShowItem>) {
+        textError.visible = tvShowList.isEmpty()
+        this.tvShowList = tvShowList as ArrayList<TvShowItem>
+        if (tvShowList.isEmpty()) textError.text = getString(R.string.text_not_found_search)
+        tvShowAdapter.setListTvShow(this.tvShowList)
     }
 
     private fun listTvShowClicked(itemSelected: TvShowItem) {
@@ -60,16 +100,8 @@ class FragmentTvShow : Fragment(), FragmentTvShowContract.View {
         startActivity(toMovieDetail)
     }
 
-    override fun getTvShowList() {
-        presenter.getTvShowList()
-    }
-
-    override fun setTvShowList(tvShowList: List<TvShowItem>) {
-        this.tvShowList = tvShowList as ArrayList<TvShowItem>
-        tvShowAdapter.setListTvShow(this.tvShowList)
-    }
-
     override fun setProgressBar(isShow: Boolean) {
+        recyclerViewTvShow.visible = !isShow
         progressBar.visible = isShow
     }
 

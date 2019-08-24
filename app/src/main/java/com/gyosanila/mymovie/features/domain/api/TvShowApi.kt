@@ -20,6 +20,12 @@ interface TvShowApi {
         @Query("page") page: Int
     ) : Observable<BaseResponse<TvShowItem>>
 
+    @GET("3/search/tv")
+    fun searchTvShow(
+        @Query("api_key") api_key: String,
+        @Query("query") query: String
+    ) : Observable<BaseResponse<TvShowItem>>
+
     @GET("3/tv/{id}")
     fun getTvShowDetail(
         @Path("id") id: Int,

@@ -2,9 +2,7 @@ package com.gyosanila.mymovie.features.fragmentMovie
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,7 +12,8 @@ import com.gyosanila.mymovie.features.adapter.MovieAdapter
 import com.gyosanila.mymovie.features.movieDetail.MovieDetailActivity
 import kotlinx.android.synthetic.main.fragment_movie.*
 import com.gyosanila.mymovie.features.domain.network.MovieItem
-
+import android.widget.SearchView
+import androidx.core.content.ContextCompat
 
 /**
  * Created by ilgaputra15
@@ -48,6 +47,7 @@ class FragmentMovie : Fragment(), FragmentMovieContract.View {
     }
 
     override fun setProgressBar(isShow: Boolean) {
+        recyclerViewMovie.visible = !isShow
         progressBar.visible = isShow
     }
 
@@ -56,6 +56,27 @@ class FragmentMovie : Fragment(), FragmentMovieContract.View {
         movieAdapter = MovieAdapter { itemSelected: MovieItem -> listMovieClicked(itemSelected) }
         recyclerViewMovie.layoutManager = LinearLayoutManager(activity)
         recyclerViewMovie.adapter = movieAdapter
+        swipeRefresh.setColorSchemeColors(ContextCompat.getColor(requireContext(), R.color.colorPrimaryDark))
+        swipeRefresh.setOnRefreshListener {
+            getListMovie()
+            searchView.setQuery("", false)
+            swipeRefresh.isRefreshing = false
+        }
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(query: String): Boolean { return true }
+            override fun onQueryTextSubmit(query: String): Boolean {
+                searchMovie(query)
+                return true
+            }
+        })
+        searchView.setOnCloseListener {
+            getListMovie()
+            false
+        }
+    }
+
+    override fun searchMovie(query: String) {
+        presenter.searchMovie(query)
     }
 
     override fun getListMovie() {
@@ -69,6 +90,14 @@ class FragmentMovie : Fragment(), FragmentMovieContract.View {
     }
 
     override fun setMovieList(movieList: List<MovieItem>) {
+        textError.visible = movieList.isEmpty()
+        this.movieList = movieList as ArrayList<MovieItem>
+        movieAdapter.setListMovie(this.movieList)
+    }
+
+    override fun setSearchMovie(movieList: List<MovieItem>) {
+        textError.visible = movieList.isEmpty()
+        if (movieList.isEmpty()) textError.text = getString(R.string.text_not_found_search)
         this.movieList = movieList as ArrayList<MovieItem>
         movieAdapter.setListMovie(this.movieList)
     }
