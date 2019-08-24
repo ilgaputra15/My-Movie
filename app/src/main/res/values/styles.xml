@@ -5,7 +5,60 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">true</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@color/colorPrimary</item>
+    </style>
+    <style name="AppTheme.NoActionBar.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="AppTheme.NoActionBar.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="AppTheme.NoActionBar.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <style name="SearchViewWithBorder" parent="Widget.AppCompat.Light.SearchView">
+        <item name="android:background">@drawable/corner_24px_gray</item>
+    </style>
+
+    <style name="TextViewCenter" parent="android:TextAppearance">
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="TextView" parent="android:TextAppearance">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:gravity">left</item>
+    </style>
+
+    <!--___________ TEXT SIZE ___________-->
+
+    <style name="TextView.Medium" parent="TextView">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextView.Big" parent="TextView">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="TextView.ExtraBig" parent="TextView">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <!--___________ TEXT BOLD ___________-->
+
+    <style name="TextView.MediumBold" parent="TextView.Medium">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextView.Big.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextView.ExtraBigBold" parent="TextView.ExtraBig">
+        <item name="android:textStyle">bold</item>
     </style>
 
 </resources>

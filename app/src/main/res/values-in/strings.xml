@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">My Movie</string>
+    <string name="title_activity_dashboard">DashboardActivity</string>
+    <string name="text_home">Dashbor</string>
+    <string name="text_overview">Kilasan</string>
+    <string name="text_title_movie">Film</string>
+    <string name="text_title_tv_show">Siaran Tv</string>
+    <string name="change_language_settings">Ubah Pengaturan Bahasa</string>
+    <string name="text_language">Bahasa</string>
+    <string name="text_budget">Anggaran</string>
+    <string name="text_revenue">Pendapatan</string>
+    <string name="text_vote">Hasil Vote</string>
+    <string name="text_run_time">Durasi</string>
+    <string name="text_popularity">Kepopuleran</string>
+    <string name="text_homepage">Website</string>
+    <string name="text_session">Episode</string>
+    <string name="text_created_by">Pembuat Cerita</string>
+    <string name="text_genres">Aliran Film</string>
+    <string name="text_favorite">favorit</string>
+    <string name="text_no_data">Tidak Ada Data</string>
+    <string name="text_success_add_favorites">Berhasil menambahkan ke favorit</string>
+    <string name="text_success_remove_favorites">Berhasil menghapus dari favorit</string>
+    <string name="text_search_movie">Cari Film</string>
+    <string name="text_search_tv_show">Cari Siaran Tv</string>
+    <string name="text_not_found_search">Tidak menemukan hasil pencarian yang cocok</string>
+    <string name="appwidget_text">Film Favorit Saya</string>
+    <string name="text_no_data_favorites">Tidak ada data fovorites</string>
+    <string name="setting_daily_remainder">Pengingat Harian</string>
+    <string name="setting_daily_remainder_detail">Pengingat kembali ke aplikasi</string>
+
+    <string name="setting_release_remainder">Pengingat Release</string>
+    <string name="setting_release_remainder_detail">Pengingat film terbaru hari ini</string>
+    <string name="text_settings">Pengaturan</string>
+    <string name="text_release_remainder">Hei, %s telah rilis hari ini!</string>
+    <string name="text_message_alarm_release">Hai, Sudah liat film hari ini belum</string>
+
+</resources>
