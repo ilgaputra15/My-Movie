@@ -4,6 +4,7 @@ import com.gyosanila.mymovie.features.domain.network.BaseResponse
 import com.gyosanila.mymovie.features.domain.network.TvShowDetail
 import com.gyosanila.mymovie.features.domain.network.TvShowItem
 import io.reactivex.Observable
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -27,8 +28,8 @@ interface TvShowApi {
     ) : Observable<BaseResponse<TvShowItem>>
 
     @GET("3/tv/{id}")
-    fun getTvShowDetail(
+    suspend fun getTvShowDetail(
         @Path("id") id: Int,
         @Query("api_key") api_key: String
-    ) : Observable<TvShowDetail>
+    ) : Response<TvShowDetail>
 }

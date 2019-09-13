@@ -7,7 +7,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.gyosanila.mymovie.core.common.ErrorState
 import com.gyosanila.mymovie.core.service.RetrofitService
-import com.gyosanila.mymovie.features.domain.api.TvShowApi
 import com.gyosanila.mymovie.features.domain.local.MyMovieRepository
 import com.gyosanila.mymovie.features.domain.local.MyMovieRoomDatabase
 import com.gyosanila.mymovie.features.domain.network.TvShowItem
@@ -52,7 +51,7 @@ class TvShowViewModel(
         tvShowResponse?.postValue(ResultResponse.OnLoading(true))
         viewModelScope.launch {
             try {
-                val user =  tvShowRepo.tvShowDetail(idTvShow)
+                val user =  tvShowRepo.getTvShowDetail(idTvShow)
                 if (user.isSuccessful) {
                     tvShowResponse?.postValue(ResultResponse.Success(user.body()))
                 } else {
