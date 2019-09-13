@@ -1,5 +1,7 @@
 package com.gyosanila.mymovie.features.tvShowDetail
 
+import androidx.lifecycle.MutableLiveData
+import com.gyosanila.mymovie.features.domain.network.ResultResponse
 import com.gyosanila.mymovie.features.domain.network.TvShowDetail
 import com.gyosanila.mymovie.features.domain.network.TvShowItem
 
@@ -10,15 +12,16 @@ import com.gyosanila.mymovie.features.domain.network.TvShowItem
  **/
 
 class TvShowDetailContract {
-    interface Presenter {
-        fun getTvShowDetail(idTvShow: Int)
-        fun onDestroy()
-    }
 
+    interface ViewModel {
+        fun detailTvShow(idTvShow: Int): MutableLiveData<ResultResponse>?
+        fun fetchDetailTvShow(idTvShow: Int)
+        fun insertTvShow(tvShow: TvShowItem)
+        fun deleteTvShowById(idTvShow: Int)
+    }
     interface View {
         fun getDataIntent()
-        fun setupUI()
-        fun getTvShowDetail()
+        fun setup()
         fun setFavorite(listTvShow: List<TvShowItem>)
         fun setIconFavorite(isFavorite: Boolean)
         fun toastAddFavorites(isAdd: Boolean)

@@ -21,5 +21,9 @@ class Alarm {
     }
 }
 
+enum class ErrorState {
+    NETWORK, RESPONSE
+}
+
 
 

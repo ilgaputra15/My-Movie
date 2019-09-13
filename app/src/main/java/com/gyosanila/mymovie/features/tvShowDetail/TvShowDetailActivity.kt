@@ -16,11 +16,11 @@ import com.gyosanila.mymovie.core.extension.visible
 import com.gyosanila.mymovie.features.domain.network.TvShowDetail
 import com.gyosanila.mymovie.features.domain.network.TvShowItem
 import kotlinx.android.synthetic.main.activity_tv_show_detail.*
+import com.gyosanila.mymovie.features.domain.network.ResultResponse
 
 class TvShowDetailActivity : AppCompatActivity(), TvShowDetailContract.View {
 
     private lateinit var tvShowItem: TvShowItem
-    private lateinit var presenter: TvShowDetailPresenter
     private lateinit var tvShowDetail: TvShowDetail
     private lateinit var tvShowViewModel: TvShowViewModel
     private lateinit var menu: Menu
@@ -29,13 +29,8 @@ class TvShowDetailActivity : AppCompatActivity(), TvShowDetailContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tv_show_detail)
-        setupUI()
-        if (savedInstanceState == null) {
-            getDataIntent()
-        } else {
-            tvShowDetail = savedInstanceState.getParcelable("tvShowDetail")
-            showTvShowDetail(tvShowDetail)
-        }
+        getDataIntent()
+        setup()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -64,20 +59,17 @@ class TvShowDetailActivity : AppCompatActivity(), TvShowDetailContract.View {
 
     override fun getDataIntent() {
         tvShowItem = intent.getParcelableExtra("TvShow")
-        getTvShowDetail()
     }
 
-    override fun setupUI() {
+    override fun setup() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         toolbar.setNavigationOnClickListener { onBackPressed() }
-        presenter = TvShowDetailPresenter(this)
         scrollView.visible = false
         tvShowViewModel = ViewModelProviders.of(this).get(TvShowViewModel::class.java)
-        tvShowViewModel.allTvShow.observe(this, Observer { listTvShow ->
-            setFavorite(listTvShow)
-        })
+        tvShowViewModel.allTvShow.observe(this, Observer { listTvShow -> setFavorite(listTvShow) })
+        tvShowViewModel.detailTvShow(tvShowItem.id)?.observe(this, Observer { response(it) })
     }
 
     override fun setFavorite(listTvShow: List<TvShowItem>) {
@@ -99,8 +91,19 @@ class TvShowDetailActivity : AppCompatActivity(), TvShowDetailContract.View {
         else Toast.makeText(this, getString(R.string.text_success_remove_favorites), Toast.LENGTH_SHORT).show()
     }
 
-    override fun getTvShowDetail() {
-        presenter.getTvShowDetail(tvShowItem.id)
+
+    private fun response(result: ResultResponse) {
+        when (result) {
+            is ResultResponse.OnLoading -> setProgressBar(true)
+            is ResultResponse.Success<*> -> {
+                setProgressBar(false)
+                showTvShowDetail(result.data as TvShowDetail)
+            }
+            is ResultResponse.Error -> {
+                setProgressBar(false)
+                Toast.makeText(this, "Fetch data error", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -130,11 +133,6 @@ class TvShowDetailActivity : AppCompatActivity(), TvShowDetailContract.View {
 
     override fun showError(error: Throwable) {
         Toast.makeText(this, "Fetch data error, ${error.message}", Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.onDestroy()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
