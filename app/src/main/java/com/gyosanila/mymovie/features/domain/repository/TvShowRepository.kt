@@ -8,6 +8,7 @@ import com.gyosanila.mymovie.features.domain.network.BaseResponse
 import com.gyosanila.mymovie.features.domain.network.TvShowDetail
 import com.gyosanila.mymovie.features.domain.network.TvShowItem
 import io.reactivex.Observable
+import retrofit2.Response
 
 /**
  * Created by ilgaputra15
@@ -25,7 +26,7 @@ class TvShowRepository(private val tvShowApi: TvShowApi = RetrofitService.movieA
         return tvShowApi.searchTvShow(Constant.MovieAPIKey, query).compose(RxUtils.applyObservableAsync())
     }
 
-    fun getTvShowDetail(id: Int) : Observable<TvShowDetail> {
-        return tvShowApi.getTvShowDetail(id, Constant.MovieAPIKey).compose(RxUtils.applyObservableAsync())
+    suspend fun getTvShowDetail(id: Int) : Response<TvShowDetail> {
+        return tvShowApi.getTvShowDetail(id, Constant.MovieAPIKey)
     }
 }

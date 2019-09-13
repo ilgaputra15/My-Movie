@@ -1,6 +1,7 @@
 package com.gyosanila.mymovie.features.domain.network
 
 import android.os.Parcelable
+import com.gyosanila.mymovie.core.common.ErrorState
 import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
@@ -23,3 +24,9 @@ data class DateRange(
     @Json(name = "maximum") val maximum: String,
     @Json(name = "minimum") val minimum: String
 ) : Parcelable
+
+sealed class ResultResponse {
+    data class OnLoading(val isLoading: Boolean) : ResultResponse()
+    data class Success<out T : Any?>(val data: T) : ResultResponse()
+    data class Error(val error: ErrorState, val statusCode: Int = 0) : ResultResponse()
+}
